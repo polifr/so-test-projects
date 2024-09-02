@@ -1,0 +1,24 @@
+version: '3.2'
+
+services:
+  db:
+    container_name: postgresql_db_ctn
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - mysql_vol3:/var/lib/postgresql/data
+volumes:
+  mysql_vol3:
+    external: true
