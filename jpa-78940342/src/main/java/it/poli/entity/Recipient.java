@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "recipient")
+@Table(name = "t_recipient")
 @Getter
 @Setter
 @NoArgsConstructor

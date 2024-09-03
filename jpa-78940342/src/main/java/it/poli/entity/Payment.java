@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,7 +19,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "t_payment")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -49,4 +50,7 @@ public class Payment implements Serializable {
 
   @Column(name = "amount")
   private Double amount;
+
+  @Column(name = "date")
+  private LocalDateTime date;
 }

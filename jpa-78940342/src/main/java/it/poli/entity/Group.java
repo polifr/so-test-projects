@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "group")
+@Table(name = "t_group")
 @Getter
 @Setter
 @NoArgsConstructor

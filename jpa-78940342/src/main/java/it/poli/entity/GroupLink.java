@@ -18,7 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "grouplink")
+@Table(name = "t_grouplink")
 @Getter
 @Setter
 @NoArgsConstructor
