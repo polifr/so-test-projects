@@ -16,7 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "recipient")
+@Table(name = "staff")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +24,7 @@ import lombok.ToString;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Recipient implements Serializable {
+public class Staff implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

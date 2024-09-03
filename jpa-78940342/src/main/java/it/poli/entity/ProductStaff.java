@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "recipient")
+@Table(name = "staff")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +26,7 @@ import lombok.ToString;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Recipient implements Serializable {
+public class ProductStaff implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -32,4 +34,15 @@ public class Recipient implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
+
+  @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
+  @OneToOne(optional = false)
+  private Staff staffId;
+
+  @JoinColumn(name = "allocation_id", referencedColumnName = "id", nullable = false)
+  @OneToOne(optional = false)
+  private ProductAllocation allocationId;
+
+  @Column(name = "type")
+  private int type;
 }
