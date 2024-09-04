@@ -1,8 +1,9 @@
 spring:
   main:
     banner-mode: "off"
-  datasource:
-    platform: "h2"
+  sql:
+    init:
+      platform: "h2"
   jpa:
     hibernate:
       ddl-auto: "none"
