@@ -30,4 +30,10 @@ class PaymentRepositoryTest {
     List<Payment> items = repository.findPaymentsUnion(Long.valueOf(0L), 0);
     assertNotNull(items);
   }
+
+  @Test
+  final void testFinalJoin() {
+    List<Payment> items = repository.findPaymentsJoin(Long.valueOf(0L), 0);
+    assertNotNull(items);
+  }
 }

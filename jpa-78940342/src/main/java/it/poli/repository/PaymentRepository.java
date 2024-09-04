@@ -29,4 +29,14 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
           + "p.allocationId.id in (SELECT allocationId.id FROM ProductStaff WHERE staffId.id = :staffId and type = :resType)"
           + ")")
   List<Payment> findPaymentsUnion(Long staffId, int resType);
+
+  @Query(
+      "select p from Payment p "
+          + "left join p.payeeId pp left join pp.allocationId ppa left join ppa.productId ppap "
+          + "left join p.allocationId pa left join pa.productId pap "
+          + "where coalesce(ppap.id, pap.id) in "
+          + "    (SELECT productId.id from GroupLink where groupId.id in (SELECT groupId.id from GroupStaff where staffId.id = :staffId)) "
+          + "  or coalesce(ppa.id, pa.id) in "
+          + "    (SELECT allocationId.id FROM ProductStaff WHERE staffId.id = :staffId and type = :resType)")
+  List<Payment> findPaymentsJoin(Long staffId, int resType);
 }
