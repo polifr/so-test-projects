@@ -1,0 +1,11 @@
+spring:
+  main:
+    banner-mode: "off"
+  jpa:
+    open-in-view: true
+
+logging:
+  level:
+    org:
+      springframework:
+        orm: TRACE
