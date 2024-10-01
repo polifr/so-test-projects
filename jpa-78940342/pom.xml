@@ -47,6 +47,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>jakarta.data</groupId>
+      <artifactId>jakarta.data-api</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-community-dialects</artifactId>
     </dependency>
