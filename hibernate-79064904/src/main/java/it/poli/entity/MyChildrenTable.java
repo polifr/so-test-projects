@@ -1,7 +1,8 @@
 package it.poli.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,11 +19,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
-public class MyTable extends AbstractEntity {
+public class MyChildrenTable extends AbstractEntity {
 
-  @Column(name = "column_1")
-  private Integer column1;
-
-  @Column(name = "column_2")
-  private Integer column2;
+  @ManyToOne
+  @JoinColumn(name = "foreign_key")
+  private MyTable foreignKey;
 }
