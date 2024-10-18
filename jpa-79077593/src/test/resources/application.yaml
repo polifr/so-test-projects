@@ -1,0 +1,9 @@
+spring:
+  main:
+    banner-mode: "off"
+  sql:
+    init:
+      platform: "h2"
+  jpa:
+    hibernate:
+      ddl-auto: "none"
