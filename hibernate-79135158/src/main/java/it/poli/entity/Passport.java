@@ -1,5 +1,6 @@
 package it.poli.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Passport {
   @Column(name = "passport_number")
   private String passportNumber;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "customer_id", referencedColumnName = "id")
   private Customer customer;
 }

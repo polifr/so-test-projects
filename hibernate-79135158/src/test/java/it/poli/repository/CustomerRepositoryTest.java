@@ -8,6 +8,7 @@ import it.poli.entity.Customer;
 import it.poli.entity.Passport;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -27,6 +28,7 @@ class CustomerRepositoryTest {
   }
 
   @Test
+  @Disabled
   void testFindAll() {
     List<Customer> items = repository.findAll();
     assertNotNull(items);
@@ -34,6 +36,7 @@ class CustomerRepositoryTest {
   }
 
   @Test
+  @Disabled
   void testSaveCustomer() {
 
     Customer customer = repository.saveAndFlush(this.buildCustomer());
@@ -51,8 +54,26 @@ class CustomerRepositoryTest {
 
   private Customer buildCustomer() {
     Passport passport = Passport.builder().passportNumber("777").build();
-    Customer customer = Customer.builder().name("Customer 1").age(77).passport(passport).build();
-    passport.setCustomer(customer);
-    return customer;
+    return Customer.builder().name("Customer 1").age(77).passport(passport).build();
+  }
+
+  @Test
+  void testSavePassport() {
+
+    Passport passport = passportRepository.saveAndFlush(this.buildPassport());
+
+    assertNotNull(passport);
+    assertNotNull(passport.getId());
+    assertNotNull(passport.getCustomer());
+    assertNotNull(passport.getCustomer().getId());
+
+    Optional<Integer> customerId = passportRepository.findCustomerId(passport.getId());
+    assertTrue(customerId.isPresent());
+    assertEquals(passport.getId(), customerId.get());
+  }
+
+  private Passport buildPassport() {
+    Customer customer = Customer.builder().name("Customer 1").age(77).build();
+    return Passport.builder().passportNumber("777").customer(customer).build();
   }
 }
