@@ -36,18 +36,23 @@ class CustomerRepositoryTest {
   @Test
   void testSaveCustomer() {
 
-    Passport passport = Passport.builder().passportNumber("777").build();
-    Customer customer =
-        repository.saveAndFlush(
-            Customer.builder().name("Customer 1").age(77).passport(passport).build());
+    Customer customer = repository.saveAndFlush(this.buildCustomer());
 
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertNotNull(customer.getPassport());
     assertNotNull(customer.getPassport().getId());
 
-    Optional<Integer> customerId = passportRepository.findCustomerId(passport.getId());
+    Optional<Integer> customerId =
+        passportRepository.findCustomerId(customer.getPassport().getId());
     assertTrue(customerId.isPresent());
     assertEquals(customer.getId(), customerId.get());
+  }
+
+  private Customer buildCustomer() {
+    Passport passport = Passport.builder().passportNumber("777").build();
+    Customer customer = Customer.builder().name("Customer 1").age(77).passport(passport).build();
+    passport.setCustomer(customer);
+    return customer;
   }
 }
