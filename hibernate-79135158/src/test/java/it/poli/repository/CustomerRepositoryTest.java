@@ -36,7 +36,6 @@ class CustomerRepositoryTest {
   }
 
   @Test
-  @Disabled
   void testSaveCustomer() {
 
     Customer customer = repository.saveAndFlush(this.buildCustomer());

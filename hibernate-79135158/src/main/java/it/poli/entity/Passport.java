@@ -36,6 +36,6 @@ public class Passport {
   private String passportNumber;
 
   @OneToOne(cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "customer_id", referencedColumnName = "id")
+  @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
   private Customer customer;
 }
