@@ -1,0 +1,34 @@
+spring:
+  main:
+    banner-mode: off
+  cloud:
+    gateway:
+      metrics:
+        enabled: true
+      default-filters:
+      - TokenRelay
+  security:
+    oauth2: # See https://docs.wiremock.io/oauth2-mock/
+      client:
+        provider:
+          mocklab:
+            authorization-uri: https://oauth.wiremockapi.cloud/oauth/authorize
+            token-uri: https://oauth.wiremockapi.cloud/oauth/token
+            user-info-uri: https://oauth.wiremockapi.cloud/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: https://oauth.wiremockapi.cloud/.well-known/jwks.json
+        registration:
+          mock-oauth2:
+            provider: mocklab
+            authorization-grant-type: authorization_code
+            scope: openid
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            clientId: mocklab_oauth2
+            clientSecret: whatever
+          mock-oidc:
+            provider: mocklab
+            authorization-grant-type: authorization_code
+            scope: openid
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            clientId: mocklab_oidc
+            clientSecret: whatever
