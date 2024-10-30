@@ -1,0 +1,11 @@
+spring:
+  main:
+    banner-mode: "off"
+  r2dbc:
+    url: "r2dbc:h2:file:///./testdb"
+
+logging:
+  level:
+    org:
+      springframework:
+        transaction: TRACE
