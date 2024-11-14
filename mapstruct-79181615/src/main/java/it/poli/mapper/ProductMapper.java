@@ -3,13 +3,22 @@ package it.poli.mapper;
 import it.poli.entity.CategoryEntity;
 import it.poli.entity.ProductEntity;
 import it.poli.model.ProductDto;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper
-interface ProductMapper {
-  @Mapping(target = "category", source = "categoryEntity")
+public abstract class ProductMapper {
+
   @Mapping(target = "name", source = "dto.name")
-  @Mapping(target = "id", ignore = true)
-  ProductEntity toEntity(ProductDto dto, CategoryEntity categoryEntity);
+  abstract ProductEntity toEntity(ProductDto dto);
+
+  @AfterMapping
+  protected ProductEntity enrichEntity(@MappingTarget ProductEntity entity, ProductDto dto) {
+
+    CategoryEntity categoryEntity = null;
+    entity.setCategory(categoryEntity);
+    return entity;
+  }
 }
